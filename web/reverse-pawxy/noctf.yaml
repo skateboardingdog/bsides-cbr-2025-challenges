@@ -1,0 +1,17 @@
+version: "1.0"
+slug: reverse-pawxy
+title: reverse pawxy
+categories: ["web"]
+difficulty: easy
+description: |
+  It sure is nice to be able to check the health of my API without exposing any of my secrets!
+
+  Author: chsh
+hosting: tls
+connection_info: ${url}
+files:
+  - ./publish/reverse-pawxy.zip
+flags:
+  - skbdg{0h_n0_my_paw_s3cre7s!}
+tags:
+  badge: paw

@@ -1,0 +1,18 @@
+version: "1.0"
+slug: uppawcase
+title: uppawcase
+categories: ["misc", "pwn"]
+difficulty: easy
+description: |
+  Please help me design a `printf` oriented program to turn characters into uppawcase!
+
+  Author: joseph
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/uppawcase.py
+  - ./publish/Dockerfile
+flags:
+  - skbdg{did_you_know_that_printf_is_turing_complete!?}
+tags:
+  badge: paw

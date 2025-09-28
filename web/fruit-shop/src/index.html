@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FruitShop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff5f5 0%, #f8f8f8 50%, #fff5f5 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(139, 0, 0, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        .logo-text {
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+        
+        .fruit-text {
+            color: #8B0000;
+        }
+        
+        .shop-text {
+            color: #333333;
+        }
+        
+        .navigation {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .nav-link {
+            color: #a52a2a;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+        }
+        
+        .nav-link:hover {
+            color: #8B0000;
+            border-bottom-color: #8B0000;
+        }
+        
+        table {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: linear-gradient(to bottom, #fafafa, #f5f5f5);
+            font-weight: 600;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            color: #555;
+        }
+        
+        tr:hover td {
+            background: #fffafa;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .error {
+            color: #d00;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <svg class="svg-icon" width="50" height="50" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M687.4 478.4c-43.9-80.2-130.4-62.4-154-44.2-16.6 12.7-32.3 10.6-49.7 0-27.4-16.8-117.5-33.6-153.9 44.3-43.8 93.8 6.6 279.7 103.4 279.7 0 0 24.2 5.5 63.9-20.2 7.1-4.6 16.3-4.2 22.9 0 39.8 25.5 72.1 20.2 72.1 20.2 79.7-0.1 145.1-188.6 95.3-279.8z" fill="#E23030" /><path d="M509.3 437.4v-64.6" fill="#20B573" /><path d="M591.1 282.6s-102.5-8.4-80.3 101c0 0 94.9 16.5 80.3-101z" fill="#2ECC71" /><path d="M702.4 470.3c-32.6-59.6-84.4-68.5-112.4-68.5-23.9 0-48.3 6.5-63.7 16.8v-17.2c16.1-0.6 42.3-5.2 61.3-26.7 18.7-21.1 25.6-52.7 20.4-94-1-7.9-7.5-14.1-15.5-14.8 0 0-2.3-0.2-6.3-0.2-15.3 0-53.5 3.1-77.1 31.9-15.8 19.3-21.4 45.6-16.8 78.2v43.8c-12.6-7.7-37.9-16.5-67.9-16.5-50.4 0-89.5 24.2-110 68.2-30.5 65.2-19.8 174.1 23.9 242.6 25.1 39.4 57.4 60.5 93.5 61.1 1.7 0.3 4.3 0.5 7.7 0.5 11.5 0 35.4-3 66.9-23.4 1.9-1.2 3.5-0.6 4.5 0 31.7 20.3 59.7 23.4 73.6 23.4 4.1 0 7.2-0.3 9-0.5 31.8-0.6 62.8-23.6 87.4-65 39-65.9 57.7-173.5 21.5-239.7zM535.5 319.1c10.7-13.1 28.2-17.4 40.1-18.8 0.9 23.4-3.6 40.8-13.4 51.9-10.3 11.6-25.1 14.8-36.7 15.3-2.5-21.1 0.9-37.4 10-48.4z m116.1 373.5c-18.3 30.8-39.9 48.4-59.3 48.4-0.8 0-1.8 0.1-2.6 0.2-0.5 0.1-2.3 0.3-5.2 0.3-10.2 0-30.8-2.3-55.2-18-12.2-7.8-29.1-7.9-41.3 0-25.1 16.2-42.2 18-48.4 18-1.3 0-2.3-0.1-2.5-0.1-1.2-0.3-2.5-0.4-3.8-0.4-30.9 0-53.1-24.7-66.3-45.3-37.5-58.9-47.5-155-21.8-210 18.8-40.2 53.5-48.6 79.2-48.6 21.6 0 41.3 6 50.5 11.7 25.4 15.6 48.2 14.9 68.9-1 6.2-4.8 23.7-11.9 46.2-11.9 25 0 59.6 8.8 82.6 50.8 30 54.7 12.4 149.5-21 205.9z" fill="#211F1E" /><path d="M647.8 570c-4.6 0-8.4-3.7-8.5-8.4-0.4-33.5-8.8-56.4-24.9-68.2-20.4-14.9-46.9-7.1-47.1-7-4.5 1.4-9.2-1.2-10.6-5.7-1.4-4.5 1.2-9.2 5.7-10.6 1.4-0.4 35-10.3 62.1 9.6 20.6 15.1 31.4 42.6 31.9 81.7 0 4.6-3.8 8.5-8.6 8.6 0.1 0 0.1 0 0 0z" fill="#FFFFFF" /></svg>
+        <div class="logo-text">
+            <span class="fruit-text">fruit</span><span class="shop-text">shop</span>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        Browse our 
+        <a class="nav-link" onclick="loadItems('fruit')">fruits</a> 
+        or 
+        <a class="nav-link" onclick="loadItems('vegetable')">vegetables</a>
+    </div>
+    
+    <div id="results" class="hidden">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>SKU</th>
+                    <th>Price</th>
+                    <th>User Rating</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="loading" class="loading hidden">Loading...</div>
+    <div id="error" class="error hidden"></div>
+    
+    <script>
+        async function loadItems(itemType) {
+            const resultsDiv = document.getElementById('results');
+            const loadingDiv = document.getElementById('loading');
+            const errorDiv = document.getElementById('error');
+            const tableBody = document.getElementById('tableBody');
+            
+            // Reset UI
+            resultsDiv.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+            loadingDiv.classList.remove('hidden');
+            tableBody.innerHTML = '';
+            
+            try {
+                const response = await fetch(`/populate?item=${itemType}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                
+                const data = await response.json();
+                loadingDiv.classList.add('hidden');
+                
+                if (data && data.length > 0) {
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        const stars = '★'.repeat(item.rating) + '☆'.repeat(5 - item.rating);
+                        
+                        // Add class based on rating for highlighting
+                        if (item.rating === 5) {
+                            row.classList.add('rating-5');
+                        } else if (item.rating === 4) {
+                            row.classList.add('rating-4');
+                        }
+                        
+                        row.innerHTML = `
+                            <td style="font-weight: 500">${item.name}</td>
+                            <td style="font-family: monospace; color: #888">${item.sku}</td>
+                            <td style="color: #2a7f2a; font-weight: 500">${(item.price / 100).toFixed(2)}</td>
+                            <td style="color: #d4a574">${stars}</td>
+                            <td style="font-weight: 600; color: #8B0000">#${item.rank}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                    resultsDiv.classList.remove('hidden');
+                } else {
+                    errorDiv.textContent = `No ${itemType}s available`;
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (err) {
+                loadingDiv.classList.add('hidden');
+                errorDiv.textContent = 'Error loading data: ' + err.message;
+                errorDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

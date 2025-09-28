@@ -1,0 +1,25 @@
+{
+  "devices": {
+    "challenge": {
+      "os": "15.8.3",
+      "ports": [
+        22,
+        1337
+      ],
+      "flavor": "iphone7",
+      "snapshot": "daa6c799-58ac-45ab-84f7-337b33f4dd03"
+    }
+  },
+  "project": {
+    "quotas": {
+      "cores": 2
+    }
+  },
+  "session": {
+    "duration": 3600
+  },
+  "connection_string_templates": [
+    "ssh -o 'ProxyCommand socat - PROXY:{cyanide_proxy_host}:%h:%p,proxyport={cyanide_proxy_port}' -o PubkeyAuthentication=no mobile@challenge.{provider_id}",
+    "(echo -n 'CONNECT challenge.{provider_id}:1337 HTTP/1.1\\n\\n'; cat) | nc {cyanide_proxy_host} {cyanide_proxy_port}"
+  ]
+}

@@ -1,0 +1,15 @@
+version: "1.0"
+slug: thats-not-a-maze
+title: that's not a maze
+categories: ["rev"]
+difficulty: hard
+description: |
+  This is a maze!
+
+  Author: equus
+files:
+  - ./publish/maze
+flags:
+  - skbdg{golang_reversing_can_be_fun}
+tags:
+  badge: polychrome-hedgedog

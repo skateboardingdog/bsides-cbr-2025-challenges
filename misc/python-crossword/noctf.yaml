@@ -1,0 +1,15 @@
+version: "1.0"
+slug: python-crossword
+title: python crossword
+categories: ["misc"]
+difficulty: easy
+description: |
+  This crossword is a little different.
+
+  Author: hashkitten
+hosting: tls
+connection_info: ${url}
+flags:
+  - skbdg{nytminihasnothingonthis}
+tags:
+  badge: dailies

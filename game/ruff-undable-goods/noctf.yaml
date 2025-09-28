@@ -1,0 +1,12 @@
+version: "1.0"
+slug: ruff-undable-goods
+title: Ruff-undable Goods
+categories: ["game", "web"]
+difficulty: easy
+description: |
+  They say ball bearings make the world go round. Apparently they can also get you a shiny flag if you have enough of them.
+
+  Author: joseph
+connection_info: ${url}
+flags:
+  - skbdg{wow_an_infinite_ball_bearing_glitch!}

@@ -1,0 +1,20 @@
+raining dogs and dogs
+======================
+
+- **Category**: misc
+- **Difficulty**: easy
+- **Author**: chsh
+
+The dogs in the CTF hall are running amok! Find out where they are going and what can be learnt along the way.
+
+![raining-dogs-and-dogs-extraction.png](raining-dogs-and-dogs-extraction.png)
+
+NOTE: This challenge involves the CTF banner (out the front of the exhibition hall). Wrap the solution word in `skbdg{}` when submitting the flag.
+
+HINT: Many of you have submitted the _six character_ cluephrase for the second part of the puzzle as the flag. If this is you, consider how the dog and skateboard change moving along the path. Extraction uses A0Z25.
+
+---
+
+### Handout files
+
+

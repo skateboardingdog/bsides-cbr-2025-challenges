@@ -1,0 +1,17 @@
+version: "1.0"
+slug: dog-blog
+title: dog blog
+categories: ["web"]
+difficulty: hard
+description: |
+  This minimal blog could definitely use a security audit...
+
+  Author: hashkitten
+hosting: tls
+connection_info: ${url}
+files:
+  - ./publish/dog-blog.zip
+flags:
+  - skbdg{i_serialously_thought_this_was_secure_af}
+tags:
+  badge: polychrome-visitor

@@ -1,0 +1,15 @@
+version: "1.0"
+slug: knock-knock
+title: knock-knock
+categories: ["rev"]
+difficulty: medium
+description: |
+  I gained access to this super secret server, muahahahaha. But I forgot how to get through my backdoor. Oops!
+
+  Author: equus
+hosting: isolated
+connection_info: ${url}
+files:
+  - ./publish/bpf
+flags:
+  - skbdg{just_another_bpf_door_knock_off}

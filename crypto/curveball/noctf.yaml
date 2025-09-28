@@ -1,0 +1,17 @@
+version: "1.0"
+slug: curveball
+title: curveball
+categories: ["crypto"]
+difficulty: medium
+description: |
+  take me out to the ballll game
+
+  take me out with the crowd!
+
+  Author: wednesday
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/chall.py
+flags:
+  - skbdg{a_bs1dh_param_chall3ng3_at_bs1d3s_canb3rra?}

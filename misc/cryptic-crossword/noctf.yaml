@@ -1,0 +1,17 @@
+version: "1.1"
+slug: cryptic-crossword
+title: cryptic crossword
+categories: ["misc"]
+difficulty: easy
+description: |
+  Encrypting skateboarding dog in C... (6)
+
+  NOTE: Physical printouts available at the CTF admin desk, while supplies last!
+
+  Author: Neobeo
+files:
+  - ./publish/skbdg-cryptic.pdf
+flags:
+  - skbdg{HCOCREQCAAUBEINUVSPIOG}
+tags:
+  badge: dailies

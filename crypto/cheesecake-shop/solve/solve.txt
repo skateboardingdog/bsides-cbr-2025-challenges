@@ -1,0 +1,13 @@
+Copy the following transcript (between the backticks), and it prints out the flag:
+
+```
+-1
+
+
+3141592653589793
+1000000000000000
+{0:1337}
+4
+print(__import__('os').getenv('FLAG'))
+
+```

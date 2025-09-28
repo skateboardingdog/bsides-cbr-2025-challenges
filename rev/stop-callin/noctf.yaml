@@ -1,0 +1,15 @@
+version: "1.0"
+slug: stop-callin
+title: stop callin'
+categories: ["rev"]
+difficulty: easy
+description: |
+  I can't hear it, I think it's breaking up on me.
+
+  Author: equus
+files:
+  - ./publish/code
+flags:
+  - skbdg{not_gonna_reach_my_telephone!!!}
+tags:
+  badge: yap

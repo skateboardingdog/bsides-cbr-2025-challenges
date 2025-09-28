@@ -1,0 +1,18 @@
+version: "1.0"
+slug: chatroom1
+title: chatroom1
+categories: ["pwn"]
+difficulty: medium
+description: |
+  Forget Discord, all the cool cats are on chatroomTM. Can you enter the 
+  private room to read the flag?
+
+  Author: john
+hosting: isolated
+connection_info: ${url}
+files:
+  - ./publish/chatroom1.tar.gz
+flags:
+  - skbdg{n0w_0wn_th3_wh0le_s3rv3r!}
+tags:
+  badge: polychrome-yap

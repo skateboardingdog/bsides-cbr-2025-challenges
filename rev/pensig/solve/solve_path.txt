@@ -1,0 +1,26 @@
+This plays like a gisnep, but there's too many rows. Also there's an 81-letter word which makes no sense. So instead let's see how to get the score up to 10. The scores are given as follows:
+1. There are no empty cells left in the grid
+2. First 5 rows hashes to some fixed target
+3. f('BSIDES')
+4. f('CANBERRA')
+5. f('SCIENCE')
+6. f('BRAINED')
+7. Last 9 rows have the same letterbank
+8. The columns of the last 9 rows have the same letterbank
+9. The "sudoku boxes" of the last 9 rows have the same letterbank
+10. A specific sequence of cells spells out "SKATEBOARDCANINE"
+
+Rule 1 is trivial, rules 7-9 basically says it's a sudoku, and rule 10 pre-seeds certain cells.
+
+So what we need to solve is rule 2 (an actual gisnep!), and rules 3-6. For the first, the quote follows normal English rules and can be solved fairly easily. But if not then it's just a O(2^26) brute force anyway.
+
+Rules 3-6 require a bit more reversing to understand what the f function does. Actually, ChatGPT figures it out quite easily. It just says that those words can be found in the grid, as in a word search. Can be horizontal, vertical, or diagonal.
+
+All that remains in constructing the grid. We can use z3 for this, but also it's quite fun to solve by hand, so we'll show how to solve it by hand.
+1. CANBERRA goes first. It must be diagonal because it has repeated letters, and the RRA cannot be in the same box, so there's only 12 places it can go on an empty grid. Fortunately the grid is not empty, so only 1 of those 12 places is valid: Start at the bottom-left corner and go north-east.
+2. SCIENCE goes next. This must also be diagonal, which means the middle E must end up in the middle box. But we already know where the E here is from CANBERRA! That leaves only one possible option: it must be going north-west.
+3. BSIDES goes next. It's shorter than BRAINED but has a repeated the letter which forces it to be diagonal. Again, there's exactly one place it can go because of the S and E. So it goes south-westerly from the sixth box.
+4. BRAINED goes last. This one is trickier because BRAINED doesn't have to be diagonal. In fact, it cannot be diagonal because it cannot go through the middle I. In any case, you want to look at any row or column where C and S are together at one end, or one at each end. Which leaves a unique placement: eastwards from the top-left corner.
+5. Then the rest of the grid solves like a normal sudoku, and we are done!
+
+See image for solved grid and flag.

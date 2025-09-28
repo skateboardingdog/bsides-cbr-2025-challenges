@@ -1,0 +1,17 @@
+version: "1.0"
+slug: shadow-the-hedgedog
+title: shadow the hedgedog
+categories: ["web"]
+difficulty: easy
+description: |
+  Did you know that Sonic the Hedgehog's favourite programming language is Kotlin?
+
+  Author: wednesday
+hosting: tls
+connection_info: ${url}
+files:
+  - ./publish/publish.tar.gz
+flags:
+  - skbdg{i_am_th3_ultimat3_lif3form_woof!}
+tags:
+  badge: hedgedog

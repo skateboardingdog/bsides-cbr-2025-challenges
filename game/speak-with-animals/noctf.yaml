@@ -1,0 +1,27 @@
+version: "1.0"
+slug: speak-with-animals
+title: Speak with Animals
+categories: ["game"]
+difficulty: easy
+description: |
+  The druid casts a spell, summoning a growling beast. In this moment, you think you can understand what it is saying.
+
+  Flag format: Wrap the four English words in `skbdg{}`, e.g. `skbdg{word1-word2-word3-word4}`.
+
+  HINT: This is the string of 4 words uttered by the human that is summoned when you interact with the druid dog on the right side. This is a phonetics puzzle, and it is recommended to download the GIF to look at each sound the human is making. Additionally, we've attached a GIF of the same human saying "skateboarding dog".
+
+  Author: chsh
+connection_info: ${url}
+files:
+  - ./src/head-skateboarding-dog.gif
+flags:
+  - data: skbdg{investment-torn-rabbit-defend}
+    strategy: "case_insensitive"
+  - data: skbdg{investment_torn_rabbit_defend}
+    strategy: "case_insensitive"
+  - data: investment-torn-rabbit-defend
+    strategy: "case_insensitive"
+  - data: investment_torn_rabbit_defend
+    strategy: "case_insensitive"
+tags:
+  badge: yap

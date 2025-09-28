@@ -1,0 +1,23 @@
+{
+  "devices": {
+    "challenge": {
+      "os": "15.8.3",
+      "ports": [
+        1337
+      ],
+      "flavor": "iphone7",
+      "snapshot": "efd38939-c800-4144-a375-953550fd5ae4"
+    }
+  },
+  "project": {
+    "quotas": {
+      "cores": 2
+    }
+  },
+  "session": {
+    "duration": 600
+  },
+  "connection_string_templates": [
+    "(echo -n 'CONNECT challenge.{provider_id}:1337 HTTP/1.1\\n\\n'; cat) | nc {cyanide_proxy_host} {cyanide_proxy_port}"
+  ]
+}

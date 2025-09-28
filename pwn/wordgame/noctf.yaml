@@ -1,0 +1,17 @@
+version: "1.0"
+slug: wordgame
+title: wordgame
+categories: ["pwn"]
+difficulty: easy
+description: |
+  Can you guess the word?
+
+  Author: john
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/wordgame.tar.gz
+flags:
+  - skbdg{d154bl3_c4p5_wh3n_r3tur1ng}
+tags:
+  badge: dailies

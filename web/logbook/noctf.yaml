@@ -1,0 +1,17 @@
+version: "1.0"
+slug: logbook
+title: logbook
+categories: ["web"]
+difficulty: easy
+description: |
+  Welcome to the skateboarding dogs' logbook. If you were here, please add a quick entry :)
+
+  Author: dot
+hosting: tls
+connection_info: ${url}
+files:
+  - ./publish/logbook.zip
+flags:
+  - skbdg{s1mp13_pR0c_w8lk1ng_a424bdc97e2f2723}
+tags:
+  badge: visitor

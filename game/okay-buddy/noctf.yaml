@@ -1,0 +1,14 @@
+version: "1.0"
+slug: okay-buddy
+title: Okay Buddy
+categories: ["game", "rev"]
+difficulty: medium
+description: |
+  There is a flag hanging from a branch on the tree next to Buddy. Try talking to him and see if he'll grab it for you...
+
+  Author: joseph
+connection_info: ${url}
+flags:
+  - skbdg{the_flag_was_stuck_in_the_linear_algebranch!}
+tags:
+  badge: yap

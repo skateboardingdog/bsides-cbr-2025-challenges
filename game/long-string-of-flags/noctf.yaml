@@ -1,0 +1,15 @@
+version: "1.0"
+slug: long-string-of-flags
+title: Long String of Flags
+categories: ["game"]
+difficulty: easy
+description: |
+  A long string of flags spells out the flag...
+
+  NOTE: The flag is case insensitive.
+
+  Author: chsh, joseph
+connection_info: ${url}
+flags:
+  - data: skbdg{flag_hunting_in_flag_bunting!}
+    strategy: "case_insensitive"

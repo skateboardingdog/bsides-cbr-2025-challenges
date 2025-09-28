@@ -1,0 +1,17 @@
+version: "1.0"
+slug: libeatpan
+title: LibEatPan
+categories: ["misc"]
+difficulty: medium
+description: |
+  We found this mail framework but couldn't quite get it working... That's all good though, all that matters is that it's pwnable.
+
+  Author: joseph
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/libeatpan.tar.gz
+flags:
+  - skbdg{wh4t_an_int3r3st1ng_l00king_ema1l_addr3ss_y0u_hav3_th3re...}
+tags:
+  badge: polychrome-cake

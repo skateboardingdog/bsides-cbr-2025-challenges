@@ -1,0 +1,17 @@
+version: "1.0"
+slug: fruit-shop
+title: fruit shop
+categories: ["web"]
+difficulty: medium
+description: |
+  This fruit shop has terrible security. But it seems it isn't exploitable.
+
+  Author: hashkitten
+hosting: tls
+connection_info: ${url}
+files:
+  - ./publish/fruit-shop.zip
+flags:
+  - skbdg{trickysql_woww0w0w0wowowooww0w0w}
+tags:
+  badge: cake

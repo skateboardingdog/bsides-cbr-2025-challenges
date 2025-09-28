@@ -1,0 +1,16 @@
+version: "1.0"
+slug: encrypted-file-server
+title: encrypted file server
+categories: ["pwn", "crypto"]
+difficulty: medium
+description: |
+  BSides Canberra CTF wouldn't be complete without a [generically](https://gitlab.com/cybears/fall-of-cybeartron/-/tree/master/challenges/bsides/2020/pwn/daas)
+  [named](https://gitlab.com/cybears/chals-2023/-/tree/main/chals/pwn/pwn-300-secureshell) crypto pwn challenge.
+
+  Author: joseph
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/encrypted-file-server.tar.gz
+flags:
+  - skbdg{m3m0ry_CoRrYPTiOn_is_th3_b3st_k1nd_0f_mem0ry_corrupt10n}

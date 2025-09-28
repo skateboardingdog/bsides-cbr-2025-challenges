@@ -1,0 +1,20 @@
+version: "1.0"
+slug: lucky-visitor
+title: Lucky Visitor
+categories: ["pwn", "ios"]
+difficulty: medium
+description: |
+  Congratulations! You are today's lucky visitor.
+
+  NOTE: This is one of two iOS pwn challenges which run on Corellium virtual hardware infrastructure.
+  AirPods 4 are up for grabs for the top two teams across both challenges, sponsored by Corellium.
+
+  Author: joseph
+connection_info: ${url}
+files:
+  - ./publish/lucky_visitor
+  - ./publish/lucky_visitor.m
+flags:
+  - skbdg{free(iphone)..._get_it!?}
+tags:
+  badge: visitor

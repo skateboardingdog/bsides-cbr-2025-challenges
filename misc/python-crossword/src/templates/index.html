@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<!--
+    There's no pwning the backend required here!
+    There is a legitimate solution.
+-->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Python Crossword</title>
+        <style>
+            body {
+                font-family: monospace;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            td {
+                width: 60px;
+                height: 60px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .grid-cell {
+                border: 1px solid #000;
+                background: #fff;
+            }
+
+            .clue {
+                font-size: 24px;
+                padding: 2px;
+            }
+
+            .row-clue {
+                text-align: right;
+                padding-right: 16px;
+            }
+
+            .col-clue {
+                vertical-align: bottom;
+                padding-bottom: 16px;
+            }
+
+            .empty {
+                border: none;
+            }
+
+            .grid-cell input {
+                width: 100%;
+                height: 100%;
+                border: none;
+                text-align: center;
+                font-family: monospace;
+                font-size: 32px;
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+
+            .ok {
+                color: green;
+                font-weight: bold;
+            }
+
+            #flag {
+                font-size: 40px;
+                position: absolute;
+                bottom: 120px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td class="empty"></td>
+                {% for col in cols %}
+                <td class="clue col-clue">{{ col }}</td>
+                {% endfor %}
+            </tr>
+
+            {% for row in rows %}
+            <tr>
+                <td class="clue row-clue">{{ row }}</td>
+                {% for col in cols %}
+                <td class="grid-cell"><input type="text" maxlength="1" /></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div id="flag"></div>
+
+        <script>
+                 async function verify() {
+                     s = [...document.querySelectorAll('.grid-cell input')].map(x => x.value.length ? x.value : ' ').join('')
+            try {
+                const response = await fetch('/verify', {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        w: s
+                    })
+                });
+                if (!response.ok) {
+                    console.error(`Error: ${response.ok}`)
+                }
+                j = await response.json()
+                document.querySelectorAll('.col-clue').forEach((x,i) => {
+                    if (j.cols_ok[i]) {
+                        x.classList.add('ok')
+                    }
+                    else {
+                        x.classList.remove('ok')
+                    }
+                })
+                document.querySelectorAll('.row-clue').forEach((x,i) => {
+                    if (j.rows_ok[i]) {
+                        x.classList.add('ok')
+                    }
+                    else {
+                        x.classList.remove('ok')
+                    }
+                })
+              document.getElementById('flag').innerText = j.flag
+            } catch (e) {
+                console.error(e.message);
+            }
+                 }
+
+                 const inputs = document.querySelectorAll('.grid-cell input');
+                 inputs.forEach((input, index) => {
+                     input.addEventListener('input', function(e) {
+                         verify();
+                         if (e.target.value.length === 1) {
+                             const nextIndex = index + 1;
+                             if (nextIndex < inputs.length) {
+                                 inputs[nextIndex].focus();
+                             }
+                         }
+                     });
+
+                     input.addEventListener('keydown', function(e) {
+                         if (e.key === 'Backspace' && e.target.value.length === 0) {
+                             const prevIndex = index - 1;
+                             if (prevIndex >= 0) {
+                                 e.preventDefault();
+                                 inputs[prevIndex].focus();
+                                 inputs[prevIndex].select();
+                             }
+                         }
+
+                         const gridWidth = {{ cols|length }};
+
+                         if (e.key === 'ArrowRight') {
+                             e.preventDefault();
+                             if (index + 1 < inputs.length) inputs[index + 1].focus();
+                         } else if (e.key === 'ArrowLeft') {
+                             e.preventDefault();
+                             if (index >= 1) inputs[index - 1].focus();
+                         } else if (e.key === 'ArrowDown') {
+                             e.preventDefault();
+                             if (index + gridWidth < inputs.length) inputs[index + gridWidth].focus();
+                         } else if (e.key === 'ArrowUp') {
+                             e.preventDefault();
+                             if (index >= gridWidth) inputs[index - gridWidth].focus();
+                         }
+                     });
+                 });
+        </script>
+    </body>
+</html>

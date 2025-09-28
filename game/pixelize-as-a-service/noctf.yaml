@@ -1,0 +1,16 @@
+version: "1.0"
+slug: pixelize-as-a-service
+title: Pixelize as a Service
+categories: ["game", "pwn"]
+difficulty: medium
+description: |
+  Find Barksy near the shed and get your pixelized image today!
+
+  NOTE: The source code for the `pixelize` binary is provided in this challenge. Please refer to the `skbdgame-server.zip` files from the "Touch Grass" challenge for the compiled binary and environment that it runs in.
+
+  Author: joseph, john
+connection_info: ${url}
+files:
+  - ./publish/pixelize.c
+flags:
+  - skbdg{n0w_y0u_kn0w_ret2p1x3l}

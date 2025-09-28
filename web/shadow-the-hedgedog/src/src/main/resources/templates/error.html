@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow - Error</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      .error-bg {
+        background: linear-gradient(135deg, #1a1a1a 0%, #8B0000 50%, #000000 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .error-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      }
+      .btn-custom {
+        background: linear-gradient(45deg, #DC143C, #8B0000);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      .btn-custom:hover {
+        background: linear-gradient(45deg, #b71c1c, #8B0000);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      .error-icon {
+        background: linear-gradient(45deg, #DC143C, #8B0000);
+        color: white;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 3rem;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.4);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 20px rgba(220, 20, 60, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(220, 20, 60, 0);
+        }
+      }
+      .text-primary {
+        color: #DC143C !important;
+      }
+      .status-badge {
+        background: rgba(220, 20, 60, 0.1);
+        border: 2px solid #DC143C;
+        color: #DC143C;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+      .error-details {
+        background: rgba(220, 20, 60, 0.05);
+        border-left: 4px solid #DC143C;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-bg">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-6">
+            <div class="error-card p-5 text-center">
+              <!-- Error Icon -->
+              <div class="error-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+              </div>
+
+              <!-- Error Title -->
+              <h1 class="display-4 fw-bold mb-4 text-primary">Something went wrong</h1>
+
+              <!-- Status Display -->
+              <p class="mb-3">Status: <span class="status-badge" th:text="${status ?: 'unknown'}">unknown</span></p>
+
+              <!-- Error Message -->
+              <p th:if="${message}" th:text="${message}" class="mb-4 text-muted"></p>
+
+              <!-- Action Button -->
+              <div class="mt-4">
+                <a href="/" class="btn btn-custom">
+                  <i class="bi bi-house me-2"></i>Go back home
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+    </html>

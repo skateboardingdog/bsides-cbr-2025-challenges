@@ -1,0 +1,16 @@
+version: "1.0"
+slug: dockjmp
+title: dockjmp
+categories: ["pwn"]
+difficulty: easy
+description: |
+  Dock jumping is kind of like long jumping, but for dogs.
+
+  Author: joseph
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/dockjmp.c
+  - ./publish/dockjmp
+flags:
+  - skbdg{__longjmp_2_win!!}

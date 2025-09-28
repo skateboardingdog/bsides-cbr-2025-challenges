@@ -1,0 +1,15 @@
+version: "1.0"
+slug: pensig
+title: pensig
+categories: ["rev"]
+difficulty: easy
+description: |
+  Like gisnep, but you also need to reverse
+
+  Author: Neobeo
+hosting: tls
+connection_info: ${url}
+flags:
+  - skbdg{ENIAC_is_also_in_the_grid}
+tags:
+  badge: dailies

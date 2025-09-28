@@ -1,0 +1,18 @@
+version: "1.0"
+slug: disc
+title: disc
+categories: ["crypto"]
+difficulty: medium
+description: |
+  Disclaimer: Discipline and a minorly discomforting amount of work may be
+  required. Player discretion advised. Do not be discouraged or discount your
+  discoveries.
+
+  Author: joseph
+files:
+  - ./publish/disc.py
+  - ./publish/output.txt
+flags:
+  - skbdg{what_a_coincidence_that_those_phrases_happen_to_be_prime!}
+tags:
+  badge: artefact

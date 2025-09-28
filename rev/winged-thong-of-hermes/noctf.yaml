@@ -1,0 +1,16 @@
+version: "1.0"
+slug: winged-thong-of-hermes
+title: The Winged Thong of Hermes
+categories:
+  - rev
+description: |
+  The winged thong of Hermes has had a plugger blowout! Can you help him manage his flipflops??
+
+  Author: wednesday
+difficulty: medium
+flags:
+  - skbdg{fl33t_as_f3ath3rs_and_swift_0f_s0ng}
+files:
+  - publish/main.hbc
+tags:
+  badge: artefact

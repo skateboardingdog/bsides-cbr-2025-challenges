@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadow - Welcome</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      .hero-bg {
+        background: linear-gradient(135deg, #1a1a1a 0%, #8B0000 50%, #000000 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .hero-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      }
+      .btn-custom {
+        background: linear-gradient(45deg, #DC143C, #8B0000);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .btn-custom:hover {
+        background: linear-gradient(45deg, #b71c1c, #8B0000);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+      .feature-icon {
+        background: linear-gradient(45deg, #DC143C, #8B0000);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+      }
+      .shadow-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid #DC143C;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-bg">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="hero-card p-5 text-center">
+            <div class="mb-4">
+                <img src="https://64.media.tumblr.com/429f4448f494de7920529b33b4df5bca/f7209c532162d23f-f9/s1280x1920/ede64cbe25220fb3907ba7359eaae8849ae7dd8b.png"
+                    alt="Shadow the Hedgehog" class="shadow-image"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display: none;">
+                  <i class="bi bi-shield-lock display-1 text-primary"></i>
+                </div>
+              </div>
+              <h1 class="display-4 fw-bold mb-4">Shadow the Hedgedog</h1>
+              <!-- Action Buttons -->
+              <div class="row justify-content-center mb-5">
+                <div class="col-md-8">
+                  <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                    <a href="/login" class="btn btn-custom btn-lg">
+                      <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                    </a>
+                    <a href="/signup" class="btn btn-outline-primary btn-lg">
+                      <i class="bi bi-person-plus me-2"></i>Create Account
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Success/Error Messages -->
+    <div
+      th:if="${error}"
+      class="position-fixed top-0 start-50 translate-middle-x mt-3"
+      style="z-index: 1050"
+    >
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        <span th:text="${error}">Error message</span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+    </div>
+    <div
+      th:if="${message}"
+      class="position-fixed top-0 start-50 translate-middle-x mt-3"
+      style="z-index: 1050"
+    >
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle me-2"></i>
+        <span th:text="${message}">Success message</span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+        ></button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
+    </html>

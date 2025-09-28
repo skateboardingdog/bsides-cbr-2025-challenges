@@ -1,0 +1,13 @@
+version: "1.0"
+slug: flag-validator
+title: Flag Validator
+categories: ["rev"]
+difficulty: medium
+description: |
+  An artisanal dynamic library, hand-crafted to print only the finest of flags.
+
+  Author: grc
+files:
+  - ./publish/flag_validator.dylib
+flags:
+  - skbdg{got_to_be_init_to_win_it}

@@ -1,0 +1,21 @@
+version: "1.0"
+slug: oxidation
+title: oxidation
+categories: ["misc"]
+difficulty: easy
+description: |
+  Oxidation, coming to an Ubuntu release near you (soon)!
+
+  ---
+
+  Flag is in `/root/flag.txt`. `sudo-rs` base commit is `51f5235`.
+
+  Author: wednesday
+hosting: isolated
+connection_info: ${url}
+files:
+  - ./publish/env.patch
+flags:
+  - skbdg{s0_much_34s13r_70_r34d_7h4n_c}
+tags:
+  badge: artefact

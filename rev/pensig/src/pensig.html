@@ -1,0 +1,243 @@
+<!doctype html><meta charset="utf-8"><title>Pensig</title>
+<style>
+  :root{--cell:32px;--b:#9aa3ad;--bg:#f5f6f7;--white:#fff;--fixed:#eaf1ff;--good:#c9f7c9;--bad:#ffd9d9;--focus:#4a90ff}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);font:16px/1.4 system-ui,Segoe UI,Arial,sans-serif;display:grid;place-items:center}
+  #wrap{padding:18px 14px;max-width:95vw}
+  #msg{height:1.2em;font-weight:600;text-align:center;margin:6px 0 10px}
+  table{border-collapse:collapse;border-spacing:0;background:var(--white)}
+  /* same width; td fixed height, th auto to fit vertical bag */
+  th,td{width:var(--cell);border:1px solid var(--b);text-align:center;}
+  td{height:var(--cell);font-weight:400;font-size:20px;vertical-align:middle}
+  th{background:#eef0f3;padding:4px;height:auto;vertical-align:bottom}
+  /* bag shows a vertical (newline) list bottom-aligned */
+  .bagbox{display:flex;align-items:flex-end;justify-content:center;min-height:calc(var(--cell)*7)}
+  .bagtext{white-space:pre;margin:0;font:600 15px/1.05 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.5px}
+  /* grid colors */
+  td.blank{background:#222;border-color:#222}
+  td.fixed{background:var(--fixed)}
+  td.good{background:var(--good)}
+  td.bad{background:var(--bad)}
+  td:focus{outline:3px solid var(--focus);outline-offset:-3px}
+  #controls{margin-top:8px;text-align:center}
+  button{margin:0 4px;padding:6px 12px;font-weight:600;border:1px solid var(--b);border-radius:4px;background:#fff;cursor:pointer}
+</style>
+<div id="wrap">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 420" role="img" aria-label="PENSIG — pen & signature logo">
+      <title>Pensig</title>
+      <style>
+        .brand { stroke:#4a90ff; fill:none; vector-effect:non-scaling-stroke }
+        .ink   { fill:#111; stroke:#111; vector-effect:non-scaling-stroke }
+        .hole  { fill:#f7f7f7; stroke:#f7f7f7 }
+        .grid  { fill:none; stroke:#4a90ff; opacity:.69; vector-effect:non-scaling-stroke }
+        .type  { fill:#111; font:800 108px/1 system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+      </style>
+    
+      <!-- faint mini grid (nod to the puzzle mechanic) -->
+      <g>
+        <!-- 5×3 cells of 22px starting at (215,170) -->
+        <g class="grid" stroke-width="1.2">
+          <!-- columns -->
+          <rect x="215" y="170" width="22" height="22"/>
+          <rect x="237" y="170" width="22" height="22"/>
+          <rect x="259" y="170" width="22" height="22"/>
+          <rect x="281" y="170" width="22" height="22"/>
+          <rect x="303" y="170" width="22" height="22"/>
+          <rect x="215" y="192" width="22" height="22"/>
+          <rect x="237" y="192" width="22" height="22"/>
+          <rect x="259" y="192" width="22" height="22"/>
+          <rect x="281" y="192" width="22" height="22"/>
+          <rect x="303" y="192" width="22" height="22"/>
+          <rect x="215" y="214" width="22" height="22"/>
+          <rect x="237" y="214" width="22" height="22"/>
+          <rect x="259" y="214" width="22" height="22"/>
+          <rect x="281" y="214" width="22" height="22"/>
+          <rect x="303" y="214" width="22" height="22"/>
+        </g>
+      </g>
+    
+      <!-- blue signature underline -->
+      <path class="brand" stroke-width="8"
+            d="M205 265
+               C260 265, 330 262, 380 260
+               C480 258, 620 280, 710 274
+               C840 266, 1000 302, 1110 292
+               C1190 282, 1270 300, 1320 298" stroke-linecap="round" stroke-linejoin="round"/>
+    
+      <!-- fountain pen nib touching the underline -->
+      <g transform="rotate(-18 195 265)">
+        <!-- nib body -->
+        <polygon class="ink" points="175,232 215,232 217,262 195,302 173,262"/>
+        <!-- breather hole & slit -->
+        <circle class="hole" cx="195" cy="265" r="6"/>
+        <line class="hole" x1="195" y1="265" x2="195" y2="302" stroke-width="3"/>
+      </g>
+    
+      <!-- tiny brand stroke from nib tip to underline start -->
+      <line class="brand" x1="206" y1="300" x2="205" y2="265" stroke-width="5" stroke-linecap="round"/>
+    
+      <!-- wordmark -->
+      <text class="type" x="420" y="210">It's Pensig!</text>
+    </svg>
+    <p id="tagline" class="tagline">Like <a href="https://gisnep.com">gisnep</a>, but you also need to reverse</p>
+  </div>
+  <table id="board">
+    <thead><tr id="bags"></tr></thead>
+    <tbody id="grid"></tbody>
+  </table>
+  <div id="controls">
+    <button id="check">Check</button>
+    Score: <span id="val">0</span>/10
+  </div>
+</div>
+<script>
+/*** customize ***/
+const QUOTE="AAAA AA A ABBABB ABAC BCCAB A BCDCB CB CDEDC DCDDEIDDCEDEDHIDEDHEIEIKEEEIFKENMEHIMINIONIINNNRNONNNRORSRRRRRSRSTSSRSSSSSUWUSUST";
+const WIDTH=9;
+/*** engine ***/
+const up=s=>s.toUpperCase(), A=c=>/[A-Z]/.test(c);
+const Q=up(QUOTE), W=WIDTH, N=Q.length, R=Math.ceil(N/W);
+const msg=document.getElementById('msg'), bagsRow=document.getElementById('bags'), grid=document.getElementById('grid');
+
+const cells=[], bag=[...Array(W)].map(()=>[]);
+
+// header bags: one cell per column with vertical text
+for(let c=0;c<W;c++){
+  const th=document.createElement('th');
+  const box=document.createElement('div'); box.className='bagbox';
+  const pre=document.createElement('pre'); pre.className='bagtext';
+  box.appendChild(pre); th.appendChild(box); bagsRow.appendChild(th);
+}
+
+// grid
+for(let r=0;r<R;r++){
+  const tr=document.createElement('tr');
+  for(let c=0;c<W;c++){
+    const i=r*W+c, ch=i<N?Q[i]:" ";
+    const td=document.createElement('td'); td.tabIndex=0;
+    if(ch===" "){td.className="blank"; td.tabIndex=-1}
+    else if(!A(ch)){td.className="fixed"; td.textContent=ch; td.tabIndex=-1}
+    else{td.dataset.col=c; td.dataset.need=ch; bag[c].push(ch)}
+    tr.appendChild(td); cells.push(td);
+  }
+  grid.appendChild(tr);
+}
+
+// shuffle bags
+for(const b of bag) for(let i=b.length-1;i>0;i--){const j=(Math.random()*(i+1))|0; [b[i],b[j]]=[b[j],b[i]];}
+
+// render bag text
+const bagEls=[...bagsRow.children].map(th=>th.querySelector('.bagtext'));
+function showBags(){ for(let c=0;c<W;c++) bagEls[c].textContent=(bag[c]||[]).join('\n'); }
+showBags();
+
+// focus & navigation
+let idx=cells.findIndex(x=>x.dataset.col!==undefined);
+function focusIdx(k){ if(k<0||k>=cells.length) return; idx=k; const x=cells[idx]; if(x.tabIndex>=0) x.focus(); }
+function step(dx,dy){ // keep stepping until a fillable cell or edge
+  let k=idx;
+  while(true){
+    const r=(k/W|0)+dy, c=(k%W)+dx;
+    if(r<0||c<0||r>=R||c>=W) return;
+    k=r*W+c;
+    if(cells[k].tabIndex>=0){ focusIdx(k); return; }
+  }
+}
+function advance(){
+  // move right within the same row
+  let r = (idx / W) | 0, c = idx % W;
+  for (let cc = c + 1; cc < W; cc++) {
+    const n = r * W + cc;
+    if (cells[n].tabIndex >= 0) { focusIdx(n); return; }
+  }
+  // wrap: scan from the start of the next row onward
+  for (let rr = r + 1; rr < R; rr++) {
+    for (let cc = 0; cc < W; cc++) {
+      const n = rr * W + cc;
+      if (cells[n].tabIndex >= 0) { focusIdx(n); return; }
+    }
+  }
+  // no next fillable cell: stay put
+}
+function retreat(){
+  // go left within the row
+  let r = (idx / W) | 0, c = idx % W;
+  for (let cc = c - 1; cc >= 0; cc--) {
+    const n = r * W + cc;
+    if (cells[n].tabIndex >= 0) { focusIdx(n); return; }
+  }
+  // wrap: scan previous rows from right to left
+  for (let rr = r - 1; rr >= 0; rr--) {
+    for (let cc = W - 1; cc >= 0; cc--) {
+      const n = rr * W + cc;
+      if (cells[n].tabIndex >= 0) { focusIdx(n); return; }
+    }
+  }
+  // nowhere to go; stay
+}
+
+// typing (consume/return letters), no live correctness
+function place(ch){
+  ch=up(ch); const x=cells[idx], c=+x.dataset.col; if(isNaN(c)) return;
+  if(A(x.textContent)) bag[c].push(x.textContent); // return prior
+  const p=bag[c].indexOf(ch);
+  if(p<0){ // not available; undo the return
+    if(A(x.textContent)){ const q=bag[c].indexOf(x.textContent); if(q>=0) bag[c].splice(q,1); }
+    return;
+  }
+  bag[c].splice(p,1); x.textContent=ch; showBags(); advance();
+}
+function erase(){
+  const x=cells[idx], c=+x.dataset.col; if(isNaN(c)) return;
+  if(A(x.textContent)){ bag[c].push(x.textContent); x.textContent=''; showBags(); }
+}
+function backspace(){
+  const curHasLetter = /[A-Z]/.test(cells[idx].textContent);
+  if (curHasLetter) {        // delete here, then move left
+    erase();
+    retreat();
+  } else {                   // move left, then delete there
+    const before = idx;
+    retreat();
+    if (idx !== before) erase();
+  }
+}
+
+// calculate score
+f=w=>{for(i=0;i<81;i++)if(s[35+i]===w[0])for(p=-1;p<2;p++)for(let q=-1;q<2;q++)if(p|q){r=i/9|0,c=i%9,j=1;
+    for(;j<w.length&&(r+=p)>=0&&r<9&&(c+=q)>=0&&c<9&&s[35+r*9+c]===w[j];j++);if(j===w.length)return 1}return 0};
+g=f=>1==new Set(Object.values(Array(81).keys().reduce((g,x)=>((g[f(x)]??=[]).push(s[35+x]),g),{})).map(x=>x.sort().join())).size;
+h=z=>z==[7,11,15,16,20,23,31,37,47,56,70,71,80,90,104,113].map(x=>s[x]).join('');
+sha=s=>crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));
+async function score() {
+    if ((s = Array.from(document.querySelectorAll('td'), td => td.textContent).join('')).length!=116) return 0;
+    res = btoa(String.fromCharCode(...new Uint8Array(await sha(s.substring(0,35)))))=='f2wY/HdX9INIR1BoLQV4Xp0HMMhUn8XZLYxlAfm1vRw=';
+    return res+1+f('BSIDES')+f('CANBERRA')+f('SCIENCE')+f('BRAINED')+g(x=>x/9|0)+g(x=>x%9)+g(x=>[x/27|0,x%9/3|0])+h('SKATEBOARD'+'CANINE');
+}
+
+// interactions
+document.getElementById('board').addEventListener('click',e=>{
+  const k=cells.indexOf(e.target); if(k>=0 && e.target.tabIndex>=0) focusIdx(k);
+});
+document.addEventListener('keydown', e => {
+  if (e.key.length === 1 && /[A-Za-z]/.test(e.key)) { place(e.key); e.preventDefault(); }
+  else if (e.key === 'Backspace') { backspace(); e.preventDefault(); }
+  else if (e.key === 'Delete')    { erase();     e.preventDefault(); }
+  else if (e.key === 'ArrowLeft') { step(-1,0);  e.preventDefault(); }
+  else if (e.key === 'ArrowRight'){ step(1,0);   e.preventDefault(); }
+  else if (e.key === 'ArrowUp')   { step(0,-1);  e.preventDefault(); }
+  else if (e.key === 'ArrowDown') { step(0,1);   e.preventDefault(); }
+});
+focusIdx(idx);
+
+// check
+document.getElementById('check').onclick=async()=>{
+    val.innerText = await score();
+    if (val.innerText == 10) {
+        // yay we have won with 10/10! let's print the flag to console
+        h = await sha(Array.from(document.querySelectorAll('td'), td => td.textContent).join(''));
+        FLAG = String.fromCharCode(...[...new Uint8Array(h)].map((v,i) => v^atob('Pn5JIJveH92M/UeyKvbvIObH9dQBuvMw5j6tEbRSOno=').charCodeAt(i)));
+        console.log(FLAG);
+    }
+}
+</script>

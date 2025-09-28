@@ -1,0 +1,12 @@
+[package]
+name = "solver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dashmap = { version = "6.1.0", features = ["rayon"] }
+hashbrown = "0.15.2"
+indicatif = "0.17.11"
+rayon = "1.10.0"
+rug = "1.27.0"
+rustc-hash = "2.1.1"

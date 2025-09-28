@@ -1,0 +1,16 @@
+version: "1.0"
+slug: hidden-number-pawblem
+title: hidden number pawblem
+categories: ["crypto"]
+difficulty: hard
+description: |
+  I encrypted my flag with a bunch of primes, but I've lost not only the
+  primes but also the ciphertext itself. Can you help me recover it?
+
+  Author: Neobeo
+files:
+  - ./publish/hnp.py
+flags:
+  - skbdg{congrats_you_have_mastered_both_OL_and_LP}
+tags:
+  badge: polychrome-paw

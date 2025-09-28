@@ -1,0 +1,20 @@
+version: "1.0"
+slug: inferior-mode-of-transpawt
+title: inferior mode of transpawt
+categories: ["misc", "osint"]
+difficulty: easy
+description: |
+  Did you catch a cheeky fellow on the back of an ACTION bus around Canberra
+  recently? If not, I'm sure you can find a photo of him on one of the
+  skateboarding dog social media accounts!
+
+  NOTE: Wrap the decoded word in `skbdg{}` when submitting the flag.
+
+  Author: BSides Canberra
+flags:
+  - data: skbdg{bussidescbr}
+    strategy: "case_insensitive"
+  - data: bussidescbr
+    strategy: "case_insensitive"
+tags:
+  badge: paw

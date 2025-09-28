@@ -1,0 +1,44 @@
+users:
+  # guest has password 'guest'
+  guest: $2y$10$dR612s6PQNaNvA6YLqqqQ.gACv5wLmA5iDzqmLRuGeDCwJaqxzCXi
+  # admin has unguessable password :(
+  admin: $2y$10$dWm/TqvLGdvBZ3C6Y34uTejPhynwCrgndIEdL8FFrN2JI5P.Mq8QW
+
+# secret key and flag are also unguessable :(
+secret_key: fK612hcn2Dj31osVDdf6LiDIBVhXDajY
+flag: skbdg{i_serialously_thought_this_was_secure_af}
+
+translations:
+  en:
+    BLOG_TITLE: 'dog blog'
+    BLOG_VIEW: 'view blog'
+    BLOG_LOGOUT: 'logout'
+    BLOG_RECENT_POSTS: 'Recent Posts'
+    BLOG_MINUTE_READ: 'minute read'
+    BLOG_USERNAME: 'Username'
+    BLOG_PASSWORD: 'Password'
+    BLOG_SIGN_IN: 'Sign In'
+    BLOG_ADMIN_WELCOME: 'Welcome to admin panel!'
+    BLOG_BY: 'by'
+  fr:
+    BLOG_TITLE: 'blog de chien'
+    BLOG_VIEW: 'voir le blog'
+    BLOG_LOGOUT: 'déconnexion'
+    BLOG_RECENT_POSTS: 'Articles Récents'
+    BLOG_MINUTE_READ: 'minute de lecture'
+    BLOG_USERNAME: "Nom d'utilisateur"
+    BLOG_PASSWORD: 'Mot de passe'
+    BLOG_SIGN_IN: 'Se connecter'
+    BLOG_ADMIN_WELCOME: "Bienvenue au panneau d'administration!"
+    BLOG_BY: 'par'
+  es:
+    BLOG_TITLE: 'blog de perros'
+    BLOG_VIEW: 'ver blog'
+    BLOG_LOGOUT: 'cerrar sesión'
+    BLOG_RECENT_POSTS: 'Publicaciones Recientes'
+    BLOG_MINUTE_READ: 'minuto de lectura'
+    BLOG_USERNAME: 'Nombre de usuario'
+    BLOG_PASSWORD: 'Contraseña'
+    BLOG_SIGN_IN: 'Iniciar sesión'
+    BLOG_ADMIN_WELCOME: '¡Bienvenido al panel de administración!'
+    BLOG_BY: 'por'

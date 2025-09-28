@@ -1,0 +1,16 @@
+version: "1.0"
+slug: touch-grass
+title: Touch Grass
+categories: ["game"]
+difficulty: easy
+description: |
+  Get out of your house and touch some grass!
+
+  NOTE: The attachment contains the game server source code which will be revelant to some of the challenges in the game category!
+
+  Author: joseph
+connection_info: ${url}
+files:
+  - ./publish/skbdgame-server.zip
+flags:
+  - skbdg{welcome_to_the_skate_~~p~~bark!}

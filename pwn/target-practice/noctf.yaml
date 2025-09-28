@@ -1,0 +1,18 @@
+version: "1.0"
+slug: target-practice
+title: Target Practice
+categories: ["pwn", "ios"]
+difficulty: hard
+description: |
+  I've hidden some secrets on the heap. Take your best shot!
+
+  NOTE: This is one of two iOS pwn challenges which run on Corellium virtual hardware infrastructure.
+  AirPods 4 are up for grabs for the top two teams across both challenges, sponsored by Corellium.
+
+  Author: grc
+connection_info: ${url}
+files:
+  - ./publish/target_practice
+  - ./publish/target_practice.c
+flags:
+  - skbdg{predicting_the_heap_is_nano_your_business}

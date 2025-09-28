@@ -1,0 +1,17 @@
+version: "1.0"
+slug: supersanic2
+title: supeRSAnic v2.0
+categories: ["crypto"]
+difficulty: medium
+description: |
+  Gotta Go Faster!
+
+  Author: joseph
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/supersanic2.py
+flags:
+  - skbdg{only_th3_f4st3st_hedged0g_can_bre4k_40_bits_in_30_s3conds!}
+tags:
+  badge: hedgedog

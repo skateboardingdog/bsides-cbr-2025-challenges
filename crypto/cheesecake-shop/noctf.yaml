@@ -1,0 +1,17 @@
+version: "1.0"
+slug: cheesecake-shop
+title: cheesecake shop
+categories: ["crypto", "misc"]
+difficulty: easy
+description: |
+  Welcome to the cheesecake shop. Please check out our brie-lliant collection of cheesecakes.
+
+  Author: Neobeo
+hosting: tcp
+connection_info: nc ${host} ${port}
+files:
+  - ./publish/cheesecake_shop.sage
+flags:
+  - skbdg{th1s_i5_n4Cho_av3Rage_crYP7o_challenge_it_H45_way_t00_many_H0L35}
+tags:
+  badge: cake

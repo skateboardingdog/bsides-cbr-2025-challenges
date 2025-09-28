@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>dog.sk8boarding.target_practice</string>
+	<key>Program</key>
+	<string>/usr/local/bin/socat</string>
+	<key>WorkingDirectory</key>
+	<string>/var/mobile/</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/bin/socat</string>
+		<string>-dd</string>
+		<string>TCP-LISTEN:1337,reuseaddr,fork</string>
+		<string>EXEC:/var/mobile/target_practice</string>
+	</array>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>MallocNanoMaxMagazines</key>
+		<string>1</string>
+		<key>MallocNanoZone</key>
+		<string>1</string>
+	</dict>
+	<key>UserName</key>
+	<string>mobile</string>
+	<key>POSIXSpawnType</key>
+	<string>Interactive</string>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>ExecuteAllowed</key>
+	<true/>
+</dict>
+</plist>

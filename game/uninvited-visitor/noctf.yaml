@@ -1,0 +1,14 @@
+version: "1.0"
+slug: uninvited-visitor
+title: Uninvited Visitor
+categories: ["game", "crypto"]
+difficulty: medium
+description: |
+  Paintings make for good home decorations to show off to visitors!
+
+  Author: joseph
+connection_info: ${url}
+flags:
+  - skbdg{wait_who_invited_you?!}
+tags:
+  badge: visitor
